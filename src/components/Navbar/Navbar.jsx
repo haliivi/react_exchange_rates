@@ -1,13 +1,14 @@
-import './Navbar.scss'
+import './Navbar.scss';
+import { NavLink } from 'react-router-dom';
 
 export const Navbar = () => {
     return (
         <nav>
             <ul>
-                <li><a href="/">Главная</a></li>
-                <li><a href="/calc">Калькулятор</a></li>
-                <li><a href="/sample">Выборки</a></li>
-                <li><a href="/info">Информация</a></li>
+                <li><NavLink to="/">Главная</NavLink></li>
+                <li><NavLink to="/calc">Калькулятор</NavLink></li>
+                <li><NavLink to="/sample">Выборки</NavLink></li>
+                <li><NavLink to="/info">Информация</NavLink></li>
             </ul>
         </nav>
     )
