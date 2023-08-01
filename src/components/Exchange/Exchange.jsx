@@ -11,7 +11,7 @@ export const Exchange = () => {
             <div className="exchange-container">
                 <div className="exchange-content">
                     <div className="">
-                        <p>Базовая валюта: &nbsp;Дата: &nbsp;</p>
+                        <p>Базовая валюта: {state.base}&nbsp;Дата: {state.date}&nbsp;</p>
                     </div>
                     <ul>
                         {

@@ -14,19 +14,36 @@ class App extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            base: 'USD',
+            base: 'EUR',
             rate: '',
             date: '',
             currency: {
-                CHF: {name: 'Китайский Юань', flag: CHF, course: '9'},
-                CNY: {name: 'Швейцарский Франк', flag: CNY, course: '9'},
-                EUR: {name: 'Евро', flag: EUR, course: '9'},
-                GBP: {name: 'Фунт Стерлинга', flag: GBP, course: '9'},
-                JPY: {name: 'Японская Ена', flag: JPY, course: '9'},
-                RUB: {name: 'Российский Рубль', flag: RUB, course: '9'},
-                USD: {name: 'Доллар США', flag: USD, course: '9'},
+                CHF: {name: 'Китайский Юань', flag: CHF, course: ''},
+                CNY: {name: 'Швейцарский Франк', flag: CNY, course: ''},
+                EUR: {name: 'Евро', flag: EUR, course: ''},
+                GBP: {name: 'Фунт Стерлинга', flag: GBP, course: ''},
+                JPY: {name: 'Японская Ена', flag: JPY, course: ''},
+                RUB: {name: 'Российский Рубль', flag: RUB, course: ''},
+                USD: {name: 'Доллар США', flag: USD, course: ''},
             }
         }
+    }
+
+    componentDidMount () {
+        fetch(`http://api.exchangeratesapi.io/v1/latest?access_key=${process.env.REACT_APP_API_KEY}&base=${this.state.base}&symbols=GBP,JPY,EUR,CHF,CNY,RUB,USD`)
+        .then(resp => resp.json())
+        .then(data => {
+            const rates = Object.keys(this.state.currency)
+            const currency = {...this.state.currency}
+            rates.forEach(rate => currency[rate].course = data.rates[rate])
+            this.setState({
+                rate: data.base,
+                date: data.date,
+                currency,
+            })
+        })
+        .catch(e => console.log(e))
+
     }
 
     render () {
