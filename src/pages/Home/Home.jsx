@@ -1,7 +1,8 @@
+import { Exchange } from '../../components/Exchange/Exchange'
 import './Home.scss'
 
 export const Home = () => {
     return (
-        <h1>Home page</h1>
+        <Exchange />
     )
 }
