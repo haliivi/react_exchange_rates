@@ -1,9 +1,10 @@
 import { addClass } from '../../hoc/AddClass'
+import { Header } from '../Header/Header'
 import './Layout.scss'
 
 const Layout = () => {
     return (
-        <h1>Layout</h1>
+        <Header />
     )
 }
 
