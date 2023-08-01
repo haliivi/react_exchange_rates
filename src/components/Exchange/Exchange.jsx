@@ -17,7 +17,7 @@ export const Exchange = () => {
                         {
                             Object.keys(currency).map((item, i) => (
                                 <li key={item}>
-                                    <span><img src={currency[item].flag} alt={currency[item].name} />{item}</span>
+                                    <span><img src={currency[item].flag} alt={currency[item].name} />&nbsp;{item}</span>
                                     <span>{`1${state.base} = ${currency[item].course} ${item}`}</span>
                                 </li>
                             ))
