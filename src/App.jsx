@@ -35,12 +35,14 @@ class App extends Component {
     inputValueHandler = e => {
         this.setState({
             inputValue: e.target.value,
+            result: null,
         })
     }
 
     currencyValueHandler = e => {
         this.setState({
             currencyValue: e.target.value,
+            result: null,
         })
     }
 

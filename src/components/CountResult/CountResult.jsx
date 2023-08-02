@@ -7,13 +7,18 @@ export const CountResult = () => {
     return (
         <div className="calculate-result">
             <ul>
-                <li>
-                    <p>
-                        <span>{state.inputValue}&nbsp;{state.base}</span>
-                        &nbsp;=&nbsp;
-                        <span>{state.result}&nbsp;{state.currencyValue}</span>
-                    </p>
-                </li>
+                {
+                    state.result ?
+                        <li>
+                            <p>
+                                <span>{state.inputValue}&nbsp;{state.base}</span>
+                                &nbsp;=&nbsp;
+                                <span>{state.result}&nbsp;{state.currencyValue}</span>
+                            </p>
+                        </li>
+                    :
+                        null
+                }
             </ul>
         </div>
     )
