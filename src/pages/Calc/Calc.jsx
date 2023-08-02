@@ -1,7 +1,14 @@
-import './Calc.scss'
+import './Calc.scss';
+import { Counter } from '../../components/Counter/Counter'
+import { CountResult } from '../../components/CountResult/CountResult'
 
 export const Calc = () => {
     return (
-        <h1>Calculate</h1>
+        <div className="calculator">
+            <div className="calculator-container">
+                <Counter />
+                <CountResult />
+            </div>
+        </div>
     )
 }
