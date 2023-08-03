@@ -9,6 +9,7 @@ import GBP from './image/GBP.png'
 import JPY from './image/JPY.png'
 import RUB from './image/RUB.png'
 import USD from './image/USD.png'
+import axios from 'axios';
 
 class App extends Component {
     constructor (props) {
@@ -29,7 +30,25 @@ class App extends Component {
             inputValue: 100,
             currencyValue: 'RUB',
             result: null,
+            sample: {
+                base: 'EUR',
+                base2: 'JPY',
+                date: '',
+            },
+            sampleList: '',
         }
+    }
+
+    baseHandler = e => {
+        this.setState({sample: {...this.state.sample, base: e.target.value}})
+    }
+
+    base2Handler = e => {
+        this.setState({sample: {...this.state.sample, base2: e.target.value}})
+    }
+
+    sampleDateHandler = e => {
+        this.setState({sample: {...this.state.sample, date: e.target.value}})
     }
 
     inputValueHandler = e => {
@@ -56,6 +75,19 @@ class App extends Component {
         })
     }
 
+    dataWrite = async sample => {
+        await axios.post(
+            'https://react-exchange-rates-default-rtdb.firebaseio.com/sample.json',
+            sample
+        )
+        await axios(
+            'https://react-exchange-rates-default-rtdb.firebaseio.com/sample.json',
+        )
+        .then(resp => {
+            this.setState({sampleList: resp.data})
+        })
+    }
+
     componentDidMount () {
         // fetch(`http://api.exchangeratesapi.io/v1/latest?access_key=${process.env.REACT_APP_API_KEY}&base=${this.state.base}&symbols=GBP,JPY,EUR,CHF,CNY,RUB,USD`)
         // .then(resp => resp.json())
@@ -79,6 +111,10 @@ class App extends Component {
                 inputValueHandler: this.inputValueHandler,
                 currencyValueHandler: this.currencyValueHandler,
                 calculatorHandler: this.calculatorHandler,
+                baseHandler: this.baseHandler,
+                base2Handler: this.base2Handler,
+                sampleDateHandler: this.sampleDateHandler,
+                dataWrite: this.dataWrite,
             }}>
                 <Layout /> 
             </RateContext.Provider>
