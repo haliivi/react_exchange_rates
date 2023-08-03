@@ -1,0 +1,42 @@
+.sample {
+    min-height: 16vw;
+    border: 1px solid #bfc4cd;
+}
+
+.sample-container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 1vw 0 1vw 0;
+}
+
+.sample-head {
+    width: 70%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.sample-result {
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+    ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li{
+            padding-left: 25%;
+            border: 1px solid #8fc4cd;
+            display: block;
+            margin-bottom: 1vw;
+            padding: .5vw;
+            display: grid;
+            grid-template-columns: 2fr 2fr 2fr .3r;
+            img {
+                width: 20px;
+                height: 15px;
+            }
+            button {
+                padding: .1vw;
+            }
+        }
+    }
+}
