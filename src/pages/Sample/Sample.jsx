@@ -10,6 +10,7 @@ export const Sample = () => {
         base2Handler,
         sampleDateHandler,
         dataWrite,
+        sampleRemove,
     } = useContext(RateContext)
     return (
         <div className="sample">
@@ -35,7 +36,18 @@ export const Sample = () => {
                     <Button text='Получить курс' onClick={dataWrite} arg={state.sample} />
                 </div>
                 <div className="sample-result">
-                    <ul></ul>
+                    <ul>
+                        {
+                            Object.keys(state.sampleList).map(item => (
+                                <li key={item}>
+                                    <span><img src={state.currency[state.sampleList[item].base].flag} alt={item} />&nbsp;{state.sampleList[item].base}</span>
+                                    <span>{state.sampleList[item].date}</span>
+                                    <span>{`${state.sampleList[item].course} ${state.sampleList[item].base2}`}</span>
+                                    <button onClick={() => sampleRemove(item)}><i className="fa fa-times" /></button>
+                                </li>
+                            ))
+                        }
+                    </ul>
                 </div>
             </div>
         </div>

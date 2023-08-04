@@ -34,6 +34,7 @@ class App extends Component {
                 base: 'EUR',
                 base2: 'JPY',
                 date: '',
+                course: null,
             },
             sampleList: '',
         }
@@ -75,17 +76,35 @@ class App extends Component {
         })
     }
 
-    dataWrite = async sample => {
+    dataWrite = async () => {
+        const sample = await fetch(
+            `http://api.exchangeratesapi.io/v1/${this.state.sample.date}?access_key=${process.env.REACT_APP_API_KEY}&base=${this.state.sample.base}&symbols=GBP,JPY,EUR,CHF,CNY,RUB,USD`
+        )
+        .then(resp => resp.json())
+        .then(data => {
+            const sample = {...this.state.sample, course: data.rates[this.state.sample.base2]}
+            this.setState(sample)
+            return sample
+        })
+
         await axios.post(
             'https://react-exchange-rates-default-rtdb.firebaseio.com/sample.json',
             sample
         )
+
         await axios(
             'https://react-exchange-rates-default-rtdb.firebaseio.com/sample.json',
         )
         .then(resp => {
             this.setState({sampleList: resp.data})
         })
+    }
+
+    sampleRemove = async id => {
+        const sampleList = {...this.state.sampleList}
+        delete sampleList[id]
+        this.setState({sampleList})
+        await axios.delete(`https://react-exchange-rates-default-rtdb.firebaseio.com/sample/${id}.json`)
     }
 
     componentDidMount () {
@@ -102,6 +121,12 @@ class App extends Component {
         //     })
         // })
         // .catch(e => console.log(e))
+        // axios(
+        //     'https://react-exchange-rates-default-rtdb.firebaseio.com/sample.json',
+        // )
+        // .then(resp => {
+        //     this.setState({sampleList: resp.data})
+        // })
     }
 
     render () {
@@ -115,6 +140,7 @@ class App extends Component {
                 base2Handler: this.base2Handler,
                 sampleDateHandler: this.sampleDateHandler,
                 dataWrite: this.dataWrite,
+                sampleRemove: this.sampleRemove,
             }}>
                 <Layout /> 
             </RateContext.Provider>
