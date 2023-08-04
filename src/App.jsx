@@ -1,14 +1,16 @@
 import { Component } from 'react';
 import './App.scss';
 import Layout from './components/Layout/Layout';
-import { RateContext } from './context/RateContext'
-import CHF from './image/CHF.png'
-import CNY from './image/CNY.png'
-import EUR from './image/EUR.png'
-import GBP from './image/GBP.png'
-import JPY from './image/JPY.png'
-import RUB from './image/RUB.png'
-import USD from './image/USD.png'
+import { Dark } from './components/Dark/Dark';
+import { Modal } from './components/Modal/Modal';
+import { RateContext } from './context/RateContext';
+import CHF from './image/CHF.png';
+import CNY from './image/CNY.png';
+import EUR from './image/EUR.png';
+import GBP from './image/GBP.png';
+import JPY from './image/JPY.png';
+import RUB from './image/RUB.png';
+import USD from './image/USD.png';
 import axios from 'axios';
 
 class App extends Component {
@@ -142,7 +144,9 @@ class App extends Component {
                 dataWrite: this.dataWrite,
                 sampleRemove: this.sampleRemove,
             }}>
-                <Layout /> 
+                <Modal />
+                <Dark />
+                <Layout />
             </RateContext.Provider>
         )
     }
