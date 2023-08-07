@@ -5,6 +5,7 @@ export const Button = props => {
         <button
             className="btn"
             onClick={() => props.onClick ? props.onClick(props.arg || '') || undefined : undefined}
+            disabled={props.disabled}
         >
             {props.text}
         </button>

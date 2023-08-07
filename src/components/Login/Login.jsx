@@ -5,7 +5,11 @@ import { useContext } from 'react';
 import { RateContext } from '../../context/RateContext';
 
 export const Login = () => {
-    const {renderInputs} = useContext(RateContext)
+    const {
+        renderInputs,
+        state,
+        loginHandler,
+    } = useContext(RateContext)
 
     return (
         <>
@@ -13,7 +17,11 @@ export const Login = () => {
                 {renderInputs()}
             </div>
             <div className="modal-btn">
-                <Button text="Войти" />
+                <Button
+                    text="Войти"
+                    disabled={!state.isFormValid}
+                    onClick={loginHandler}
+                />
             </div>
         </>
     )
