@@ -16,12 +16,8 @@
     }
 
     span {
-        color: #f01f30;
-        font-size: 14px;
+        color: #f01f30 !important;
+        font-size: 14px !important;
         font-weight: bold;
     }
-}
-
-.input-invalid label {
-    color: #f01f30;
 }

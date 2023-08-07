@@ -66,8 +66,13 @@ class App extends Component {
                 course: null,
             },
             sampleList: '',
+            showModal: false,
         }
     }
+
+    modalShowHandler = () => this.setState({showModal: true,})
+
+    modalHideHandler = () => this.setState({showModal: false,})
 
     validateControl (value, validation) {
         if  (!validation) {
@@ -232,9 +237,11 @@ class App extends Component {
                 dataWrite: this.dataWrite,
                 sampleRemove: this.sampleRemove,
                 renderInputs: this.renderInputs,
+                modalHideHandler: this.modalHideHandler,
+                modalShowHandler: this.modalShowHandler,
             }}>
                 <Modal />
-                <Dark />
+                <Dark showModal={this.state.showModal} modalHideHandler={this.modalHideHandler} />
                 <Layout />
             </RateContext.Provider>
         )
