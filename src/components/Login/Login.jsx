@@ -1,20 +1,20 @@
-import { Button } from '../Button/Button'
-import './Login.scss'
+import { Button } from '../Button/Button';
+import './Login.scss';
+import { Input } from '../../components/Input/Input'
+import { useContext } from 'react';
+import { RateContext } from '../../context/RateContext';
 
-export const Login = () => (
-    <>
-        <div className="modal-form">
-            <div className="modal-input">
-                <span>Войти</span>
-                <input type="text" />
+export const Login = () => {
+    const {renderInputs} = useContext(RateContext)
+
+    return (
+        <>
+            <div className="modal-form">
+                {renderInputs()}
             </div>
-            <div className="modal-input">
-                <span>Войти</span>
-                <input type="text" />
+            <div className="modal-btn">
+                <Button text="Войти" />
             </div>
-        </div>
-        <div className="modal-btn">
-            <Button text="Войти" />
-        </div>
-    </>
-)
+        </>
+    )
+}

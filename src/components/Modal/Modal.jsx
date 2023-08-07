@@ -12,7 +12,7 @@ export const Modal = () => (
             <img className="fa fa-times" src="" alt="" aria-hidden="true" />
         </div>
         <hr />
-        <Login />
-        {/* <Register /> */}
+        {/* <Login /> */}
+        <Register />
     </div>
 )

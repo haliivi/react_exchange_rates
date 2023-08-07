@@ -12,11 +12,38 @@ import JPY from './image/JPY.png';
 import RUB from './image/RUB.png';
 import USD from './image/USD.png';
 import axios from 'axios';
+import { Input } from './components/Input/Input';
 
 class App extends Component {
     constructor (props) {
         super(props)
         this.state = {
+            formControls: {
+                email: {
+                    value: '',
+                    type: 'email',
+                    label: 'Email',
+                    errMessage: 'Введите корректный email',
+                    valid: false,
+                    touched: false,
+                    validation: {
+                        required: true,
+                        email: true
+                    }
+                },
+                password: {
+                    value: '',
+                    type: 'password',
+                    label: 'Пароль',
+                    errMessage: 'Введите корректный пароль',
+                    valid: false,
+                    touched: false,
+                    validation: {
+                        required: true,
+                        minLength: 6,
+                    }
+                },
+            },
             base: 'EUR',
             rate: '',
             date: '',
@@ -40,6 +67,67 @@ class App extends Component {
             },
             sampleList: '',
         }
+    }
+
+    validateControl (value, validation) {
+        if  (!validation) {
+            return true
+        }
+        let isValid = true
+        if (validation.required) {
+            isValid = value.trim() !== '' && isValid
+        }
+        if (validation.email) {
+            isValid = String(value)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            ) && isValid
+        }
+        if (validation.minLength) {
+            isValid = value.length >= validation.minLength && isValid
+        }
+        return isValid
+    }
+
+    onChangeHandler = (e, controlName) => {
+        const formControls = {...this.state.formControls}
+        const control = {...formControls[controlName]}
+        control.value = e.target.value
+        control.touched = true
+        control.valid = this.validateControl(control.value, control.validation)
+        formControls[controlName] = control
+        this.setState({formControls})
+    }
+
+    renderInputs = () => {
+        return Object.keys(this.state.formControls).map(controlName => {
+            const control = this.state.formControls[controlName]
+            const {
+                value,
+                type,
+                label,
+                errMessage,
+                valid,
+                touched,
+                validation,
+            } = control
+
+            return (
+                <Input
+                    key={controlName}
+                    value={value}
+                    type={type}
+                    label={label}
+                    errMessage={errMessage}
+                    valid={valid}
+                    touched={touched}
+                    validation={validation}
+                    shouldValidate={true}
+                    onChange={e => this.onChangeHandler(e, controlName)}
+                />
+            )
+        })
     }
 
     baseHandler = e => {
@@ -143,6 +231,7 @@ class App extends Component {
                 sampleDateHandler: this.sampleDateHandler,
                 dataWrite: this.dataWrite,
                 sampleRemove: this.sampleRemove,
+                renderInputs: this.renderInputs,
             }}>
                 <Modal />
                 <Dark />
