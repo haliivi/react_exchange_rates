@@ -44,6 +44,7 @@ export const Modal = () => {
                 />
             </div>
             <hr />
+            <h2 style={{color: '#f01f30', textAlign: 'center'}}>{state.err.message}</h2>
             {
                 val === 'register' ? <Register /> : <Login />
             }

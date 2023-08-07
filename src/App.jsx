@@ -18,6 +18,8 @@ class App extends Component {
     constructor (props) {
         super(props)
         this.state = {
+            auth: false,
+            err: '',
             formControls: {
                 email: {
                     value: '',
@@ -81,10 +83,24 @@ class App extends Component {
             password: this.state.formControls.password.value,
             returnSecureToken: true,
         }
+        const formControls = {...this.state.formControls}
+        formControls.email.value = ''
+        formControls.password.value = ''
         await axios.post(
             `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY_AUTH_FIREBASE}`,
             authData
-        ).catch(e => console.log(e))
+        )
+        .then(resp => {
+            this.setState({
+                auth: true,
+                showModal: false,
+                err: '',
+                ...formControls
+            })
+        })
+        .catch(e => {
+            this.setState({err: e})
+        })
     }
 
     registerHandler = async () => {
@@ -93,10 +109,24 @@ class App extends Component {
             password: this.state.formControls.password.value,
             returnSecureToken: true,
         }
+        const formControls = {...this.state.formControls}
+        formControls.email.value = ''
+        formControls.password.value = ''
         await axios.post(
             `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY_AUTH_FIREBASE}`,
             authData
-        ).catch(e => console.log(e))
+        )
+        .then(resp => {
+            this.setState({
+                auth: true,
+                showModal: false,
+                err: '',
+                ...formControls,
+            })
+        })
+        .catch(e => {
+            this.setState({err: e})
+        })
     }
 
     validateControl (value, validation) {
