@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/react_exchange_rates/static/css/main.3ca60f51.css",
+    "main.js": "/react_exchange_rates/static/js/main.b6633d77.js",
+    "static/js/787.e3c7d5de.chunk.js": "/react_exchange_rates/static/js/787.e3c7d5de.chunk.js",
+    "static/media/USD.png": "/react_exchange_rates/static/media/USD.cafdbbd0fa897de802e3.png",
+    "static/media/GBP.png": "/react_exchange_rates/static/media/GBP.cd2d9f0da1b0677cf8b6.png",
+    "static/media/EUR.png": "/react_exchange_rates/static/media/EUR.f743010e3b598e11e840.png",
+    "static/media/JPY.png": "/react_exchange_rates/static/media/JPY.4b2c41c942a7aba6851d.png",
+    "static/media/CNY.png": "/react_exchange_rates/static/media/CNY.16052c5e33052ac4149f.png",
+    "static/media/RUB.png": "/react_exchange_rates/static/media/RUB.3b0c98324c9d000887d1.png",
+    "index.html": "/react_exchange_rates/index.html",
+    "main.3ca60f51.css.map": "/react_exchange_rates/static/css/main.3ca60f51.css.map",
+    "main.b6633d77.js.map": "/react_exchange_rates/static/js/main.b6633d77.js.map",
+    "787.e3c7d5de.chunk.js.map": "/react_exchange_rates/static/js/787.e3c7d5de.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3ca60f51.css",
+    "static/js/main.b6633d77.js"
+  ]
+}
